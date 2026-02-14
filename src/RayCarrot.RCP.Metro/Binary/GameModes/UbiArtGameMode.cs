@@ -76,8 +76,47 @@ public enum UbiArtGameMode
     [UbiArtGameModeInfo("Valiant Hearts (Android)", BinarySerializer.UbiArt.Game.ValiantHearts, Platform.Android)]
     ValiantHearts_Android,
 
+    [UbiArtGameModeInfo("Just Dance 2014 (Wii U)", BinarySerializer.UbiArt.Game.JustDance2014, Platform.WiiU)]
+    JustDance_2014_WiiU,
+
+    [UbiArtGameModeInfo("Just Dance Japan (Wii U)", BinarySerializer.UbiArt.Game.JustDance2014JP, Platform.WiiU)]
+    JustDance2014JP_WiiU,
+
+    [UbiArtGameModeInfo("Yo-kai Watch Dance (Wii U)", BinarySerializer.UbiArt.Game.JustDanceYoKaiWatch, Platform.WiiU)]
+    JustDanceYoKaiWatch_WiiU,
+
+    [UbiArtGameModeInfo("Just Dance 2015 (Wii U)", BinarySerializer.UbiArt.Game.JustDance2015, Platform.WiiU)]
+    JustDance_2015_WiiU,
+
+    [UbiArtGameModeInfo("Just Dance 2016 DEMO (Wii U)", BinarySerializer.UbiArt.Game.JustDance2016DEMO, Platform.WiiU)]
+    JustDance_2016_DEMO_WiiU,
+
+    [UbiArtGameModeInfo("Just Dance 2016 (Wii U)", BinarySerializer.UbiArt.Game.JustDance2016, Platform.WiiU)]
+    JustDance_2016_WiiU,
+
+    [UbiArtGameModeInfo("Just Dance 2017 DEMO (Wii U)", BinarySerializer.UbiArt.Game.JustDance2017DEMO, Platform.WiiU)]
+    JustDance_2017_DEMO_WiiU,
+
+    [UbiArtGameModeInfo("Just Dance 2017 (PC)", BinarySerializer.UbiArt.Game.JustDance2017, Platform.PC)]
+    JustDance_2017_PC,
+
     [UbiArtGameModeInfo("Just Dance 2017 (Wii U)", BinarySerializer.UbiArt.Game.JustDance2017, Platform.WiiU)]
     JustDance_2017_WiiU,
+
+    [UbiArtGameModeInfo("Just Dance 2018 DEMO (Wii U)", BinarySerializer.UbiArt.Game.JustDance2018DEMO, Platform.WiiU)]
+    JustDance_2018_DEMO_WiiU,
+
+    [UbiArtGameModeInfo("Just Dance 2018 (Wii U)", BinarySerializer.UbiArt.Game.JustDance2018, Platform.WiiU)]
+    JustDance_2018_WiiU,
+
+    [UbiArtGameModeInfo("Just Dance 2019 DEMO (Wii U)", BinarySerializer.UbiArt.Game.JustDance2019DEMO, Platform.WiiU)]
+    JustDance_2019_DEMO_WiiU,
+
+    [UbiArtGameModeInfo("Just Dance 2019 (Wii U)", BinarySerializer.UbiArt.Game.JustDance2019, Platform.WiiU)]
+    JustDance_2019_WiiU,
+
+    [UbiArtGameModeInfo("Just Dance 2022 (Switch)", BinarySerializer.UbiArt.Game.JustDance2022, Platform.NintendoSwitch)]
+    JustDance_2022_Switch,
 
     [UbiArtGameModeInfo("Gravity Falls (3DS)", BinarySerializer.UbiArt.Game.GravityFalls, Platform.Nintendo3DS)]
     GravityFalls_3DS,
