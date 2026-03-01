@@ -2,17 +2,14 @@
 This document contains a list of planned features to be added in the Rayman Control Panel, in no particular order. Due to the scope of this a lot of these might never have a chance to actually be implemented. I do however appreciate any help I can get, so if anyone wants to help out then feel free to contact me or leave a PR!
 
 ## 🖥️ Version 15.0 - Core Update
-Version 15.0 will see the app being migrated to the latest .NET version (currently .NET 8). Due to .NET not being pre-installed with Windows it means we need to change how the app is installed by the user. The current plan is to make the app fully installable using an installer such as [Inno Setup](https://jrsoftware.org/isinfo.php) which will then install any required dependencies. The updater will then instead download the latest installer file from the GitHub releases.
+Version 15.0 will see the app being migrated to the latest .NET version (currently .NET 8). Due to .NET not being pre-installed with Windows it means we need to change how the app is installed by the user. The original plan was to make the app fully installable using an installer such as [Inno Setup](https://jrsoftware.org/isinfo.php) which would then install any required dependencies, and the updater would then instead download the latest installer file from the GitHub releases. However it might be preferable to have it be a portable folder instead. We would still need a custom updater then which would delete all local files and replace them with the latest ones.
 
 ### Changes
-- Migrate to .NET 8
-- Deploy app using an installer
-- Remove custom updater and replace by downloading latest installer file
+- Migrate to .NET 10
+- Deploy app using an installer or portable folder
 - Remove custom uninstaller and rely on the installer being able to uninstall the app
 - The way Windows APIs are called will need to be updated ([docs](https://learn.microsoft.com/en-us/windows/apps/desktop/modernize/desktop-to-uwp-enhance))
-
-### Portable version?
-Can we also offer a portable version where the user must manually install dependencies such as .NET? How will the update process work then? If portable then store app data locally in the folder?
+- Change where and how app data is stored, allowing to be stored in the app folder
 
 ## 👁️‍🗨️ Avalonia UI
 Long-term it would be beneficial to migrate the app to a cross-platform framework such as Avalonia UI. This would allow for a native Linux version, which has been highly requested, and to have the app take advantage of the performance improvements which come with a newer framework. This would however be a major task since essentially all of the UI would need to be updated, especially the styles which would all need to be rewritten.
@@ -60,10 +57,13 @@ Open with (external) ->
 - Update the UI for selecting the app language. Have each language show a flag, a percentage for the translation completion and credits to the translators.
 - Redesign the program selection dialog and improve scrolling
 - Redesign the Utilities page.
+- Redesign the language selection with credits for each translation, percentage of how much each language has been translated and maybe flags for each language
 
 ## 📦 Mod Loader
 - Allow modding disc based games with a virtual file-system, primarily for Rayman 1 on PS1
 - Add `costumes` module for Origins and Legends, allowing new costumes to be added, with the mod loader then merging them all together into the gameconfig to avoid file conflicts
+- Allow mods to specify custom game icon and name, useful for mods which act as expansion packs to the game such as Rayman Expert and Rayman Origins 2
+- In Mod Creator have Mod Editor option for editing metadata. Or as a separate option from the game panel?
 
 ## 📦 Archive Explorer
 - Add launch handlers for common archives like .ipk and .cnt so they can be opened in RCP directly from Windows File Explorer. Check if it's in a game folder to find version info, otherwise ask the user.
@@ -109,6 +109,7 @@ Open with (external) ->
 - Add mGBA to runtime modifications - might need to do memory search to find pointer due to its complexity (no static pointer)
 - Allow launching through Steam even if it's not a native Steam game. The user might have added the game as a non-Steam game.
 - Rewrite DOSBox config. Have all values needed to run well. Include scaler, output and joystick options. Add info for each on what they do. Also explain how the autoexecute commands work. Don't use 3-way checkboxes cause it's confusing. Instead have some better way to do it?
+- Find fan-games if they have been installed through the GameJolt client
 
 ## ⚒️ Game Settings
 - Have settings which replace a file, such as the controller fixes, apply it through a mod in the mod loader rather than just manually replacing the file
@@ -131,6 +132,7 @@ Open with (external) ->
 - Add progression support for: 
     - Rayman Edutainment games
     - Rayman Raving Rabbids PS2 (same format as PC, but minigame ids seem different?)
+    - Rayman 30th Anniversary Edition (probably a separate progression manager per game?)
 
 ## 🗒️ Miscellaneous
 - Only cache 10 most recent app news entries. Save checksum. News.json has checksum and list of json files with 10 news each.
@@ -139,4 +141,5 @@ Open with (external) ->
 - Add converter for converting UBIArt textures
 - Add option to create desktop shortcut for a game group, like "Rayman 2", which when opened gives you a window allowing you to select which one to launch
 - Use a service like [Weblate](https://weblate.org/) for localization
-- Add `folder settings` to the app settings where the user specifies the folder RCP uses for storing data, downloading games etc.
+- Add `folder settings` to the app settings where the user specifies the folder RCP uses for storing data the different types of data
+- Add serializers for Ubisoft Connect saves
