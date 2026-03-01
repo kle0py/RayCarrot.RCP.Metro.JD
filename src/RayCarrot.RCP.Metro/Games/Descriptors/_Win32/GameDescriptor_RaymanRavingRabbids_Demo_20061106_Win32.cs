@@ -1,5 +1,4 @@
 ﻿using RayCarrot.RCP.Metro.Games.Components;
-using RayCarrot.RCP.Metro.Games.Finder;
 using RayCarrot.RCP.Metro.Games.Settings;
 using RayCarrot.RCP.Metro.Games.Structure;
 
@@ -64,15 +63,6 @@ public sealed class GameDescriptor_RaymanRavingRabbids_Demo_20061106_Win32 : Win
     public override IEnumerable<GameAddAction> GetAddActions() => new GameAddAction[]
     {
         new LocateDirectoryGameAddAction(this),
-        new DownloadGameAddAction(this, new Uri[]
-        {
-            new(AppURLs.Games_RRRDemo_Url),
-        })
-    };
-
-    public override FinderQuery[] GetFinderQueries() => new FinderQuery[]
-    {
-        new PreviouslyDownloadedGameFinderQuery(GameId, LegacyGameId),
     };
 
     #endregion

@@ -30,7 +30,6 @@ public enum GenericIconKind
 
     GameAdd_Locate,
     GameAdd_DiscInstall,
-    GameAdd_Download,
     GameAdd_Purchase,
 
     SetupGame_Mod,
@@ -60,7 +59,6 @@ public enum GenericIconKind
     Window_ModCreator,
     Window_GameSettings,
     Window_Installer,
-    Window_Downloader,
     Window_DriveSelection,
     Window_ItemSelection,
     Window_GamesSelection,

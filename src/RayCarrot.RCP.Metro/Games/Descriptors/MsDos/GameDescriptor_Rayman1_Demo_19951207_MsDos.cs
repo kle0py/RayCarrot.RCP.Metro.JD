@@ -1,5 +1,4 @@
 ﻿using RayCarrot.RCP.Metro.Games.Components;
-using RayCarrot.RCP.Metro.Games.Finder;
 using RayCarrot.RCP.Metro.Games.Structure;
 
 namespace RayCarrot.RCP.Metro;
@@ -25,28 +24,12 @@ public sealed class GameDescriptor_Rayman1_Demo_19951207_MsDos : MsDosGameDescri
 
     #endregion
 
-    #region Private Methods
-
-    private static Task TryFindMountPath(GameInstallation gameInstallation)
-    {
-        // Set the default mount path if available
-        FileSystemPath mountPath = gameInstallation.InstallLocation.Directory + "Disc" + "RAYMAN_PC_DEMO.cue";
-
-        if (mountPath.FileExists)
-            gameInstallation.SetValue(GameDataKey.Client_DosBox_MountPath, mountPath);
-
-        return Task.CompletedTask;
-    }
-
-    #endregion
-
     #region Protected Methods
 
     protected override void RegisterComponents(IGameComponentBuilder builder)
     {
         base.RegisterComponents(builder);
 
-        builder.Register(new OnGameAddedComponent(TryFindMountPath));
         builder.Register<BinaryGameModeComponent>(new Ray1GameModeComponent(Ray1GameMode.Rayman1_PC));
     }
 
@@ -66,15 +49,6 @@ public sealed class GameDescriptor_Rayman1_Demo_19951207_MsDos : MsDosGameDescri
     public override IEnumerable<GameAddAction> GetAddActions() => new GameAddAction[]
     {
         new LocateDirectoryGameAddAction(this),
-        new DownloadGameAddAction(this, new Uri[]
-        {
-            new(AppURLs.Games_R1Demo1_Url),
-        })
-    };
-
-    public override FinderQuery[] GetFinderQueries() => new FinderQuery[]
-    {
-        new PreviouslyDownloadedGameFinderQuery(GameId, LegacyGameId),
     };
 
     #endregion
