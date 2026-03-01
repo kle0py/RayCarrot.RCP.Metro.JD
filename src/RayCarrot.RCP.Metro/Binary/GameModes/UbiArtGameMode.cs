@@ -88,6 +88,9 @@ public enum UbiArtGameMode
     [UbiArtGameModeInfo("Just Dance 2015 (Wii U)", BinarySerializer.UbiArt.Game.JustDance2015, Platform.WiiU)]
     JustDance_2015_WiiU,
 
+    [UbiArtGameModeInfo("Just Dance 2016 (PS3)", BinarySerializer.UbiArt.Game.JustDance2016, Platform.PlayStation3)]
+    JustDance_2016_PS3,
+
     [UbiArtGameModeInfo("Just Dance 2016 DEMO (Wii U)", BinarySerializer.UbiArt.Game.JustDance2016DEMO, Platform.WiiU)]
     JustDance_2016_DEMO_WiiU,
 
@@ -114,6 +117,15 @@ public enum UbiArtGameMode
 
     [UbiArtGameModeInfo("Just Dance 2019 (Wii U)", BinarySerializer.UbiArt.Game.JustDance2019, Platform.WiiU)]
     JustDance_2019_WiiU,
+
+    [UbiArtGameModeInfo("Just Dance 2020 (Wii)", BinarySerializer.UbiArt.Game.JustDance2020, Platform.Wii)]
+    JustDance_2020_Wii,
+
+    [UbiArtGameModeInfo("Just Dance 2020 (Switch)", BinarySerializer.UbiArt.Game.JustDance2020, Platform.NintendoSwitch)]
+    JustDance_2020_Switch,
+
+    [UbiArtGameModeInfo("Just Dance 2021 (Switch)", BinarySerializer.UbiArt.Game.JustDance2021, Platform.NintendoSwitch)]
+    JustDance_2021_Switch,
 
     [UbiArtGameModeInfo("Just Dance 2022 (Switch)", BinarySerializer.UbiArt.Game.JustDance2022, Platform.NintendoSwitch)]
     JustDance_2022_Switch,
