@@ -11,6 +11,7 @@ public class PrototypeRestorationViewModel : BaseViewModel, IDisposable
     public PrototypeRestorationViewModel(GameInstallation gameInstallation)
     {
         GameInstallation = gameInstallation;
+        LoaderViewModel = new LoaderViewModel();
         MemoryPatcher = new MemoryPatcher();
 
         MemoryModSections = new ObservableCollection<MemoryModsSectonViewModel>()
@@ -503,6 +504,7 @@ public class PrototypeRestorationViewModel : BaseViewModel, IDisposable
     #region Public Properties
 
     public GameInstallation GameInstallation { get; }
+    public LoaderViewModel LoaderViewModel { get; }
 
     // Memory Mods
     public MemoryPatcher MemoryPatcher { get; }
@@ -681,15 +683,12 @@ public class PrototypeRestorationViewModel : BaseViewModel, IDisposable
             return;
 
         // Download the game
-        bool downloaded = await Services.App.DownloadAsync(new[]
+        bool downloaded = await Services.App.DownloadGameBananaFileAsync(version switch
         {
-            version switch
-            {
-                GameVersion.Steam => new Uri(AppURLs.RRR_PatchedBF_Steam_URL),
-                GameVersion.GOG_UbisoftConnect => new Uri(AppURLs.RRR_PatchedBF_GOG_URL),
-                _ => throw new Exception("Invalid game version")
-            }
-        }, true, GameInstallation.InstallLocation.Directory);
+            GameVersion.Steam => AppURLs.RaymanRavingRabbidsSteamPatchedBFGameBananaFileId,
+            GameVersion.GOG_UbisoftConnect => AppURLs.RaymanRavingRabbidsGOGPatchedBFGameBananaFileId,
+            _ => throw new Exception("Invalid game version")
+        }, GameInstallation.InstallLocation.Directory, LoaderViewModel);
 
         if (!downloaded)
             return;
@@ -754,6 +753,7 @@ public class PrototypeRestorationViewModel : BaseViewModel, IDisposable
             Jade_BIG_BigFile bf = FileFactory.Read<Jade_BIG_BigFile>(context, PatchedBFFilePath.Name);
 
             BinaryDeserializer s = context.Deserializer;
+            s.Goto(bf.Offset);
 
             foreach (BFModToggleViewModel bfMod in BFModToggles)
             {
@@ -794,7 +794,8 @@ public class PrototypeRestorationViewModel : BaseViewModel, IDisposable
             // Read the file
             Jade_BIG_BigFile bf = FileFactory.Read<Jade_BIG_BigFile>(context, PatchedBFFilePath.Name);
 
-            var s = context.Serializer;
+            BinarySerializer.BinarySerializer s = context.Serializer;
+            s.Goto(bf.Offset);
 
             foreach (BFModToggleViewModel bfMod in BFModToggles)
             {

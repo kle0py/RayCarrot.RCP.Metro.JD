@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Text;
 using Newtonsoft.Json.Linq;
+using Octokit;
 using RayCarrot.RCP.Metro.Games.Components;
 using RayCarrot.RCP.Metro.ModLoader.Dialogs.ModLoader;
 using RayCarrot.RCP.Metro.ModLoader.Library;
@@ -145,7 +146,9 @@ public class GameBananaModsSource : DownloadableModsSource
             Dictionary<int, int[]>? featuredMods = null;
             try
             {
-                featuredMods = await JsonHelpers.DeserializeFromURLAsync<Dictionary<int, int[]>>(AppURLs.ModLoader_FeaturedGameBananaMods_URL);
+                GitHubClient client = new RCPGitHubClient();
+                byte[] rawData = await client.Repository.Content.GetRawContent(AppURLs.GitHubUserName, AppURLs.GitHubRepoName, AppURLs.GitHubHostedFeaturedGameBananaModsFilePath);
+                featuredMods = JsonHelpers.DeserializeFromByteArray<Dictionary<int, int[]>>(rawData);
             }
             catch (Exception ex)
             {
@@ -357,7 +360,8 @@ public class GameBananaModsSource : DownloadableModsSource
             // Try and get the defined file if we have a file id
             long? fileId = dependencyDatas.FirstOrDefault(x => x.ModId == mod.Id)?.FileId;
             if (fileId != null)
-                file = mod.Files?.FirstOrDefault(x => x.Id == fileId);
+                file = mod.Files?.FirstOrDefault(x => x.Id == fileId) ?? 
+                       mod.ArchivedFiles?.FirstOrDefault(x => x.Id == fileId);
 
             // Search for valid files if we didn't get one
             if (file == null)

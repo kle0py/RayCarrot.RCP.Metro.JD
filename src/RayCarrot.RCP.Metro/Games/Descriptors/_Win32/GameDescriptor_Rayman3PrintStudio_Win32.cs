@@ -1,7 +1,4 @@
-﻿using RayCarrot.RCP.Metro.Games.Components;
-using RayCarrot.RCP.Metro.Games.Finder;
-using RayCarrot.RCP.Metro.Games.Options;
-using RayCarrot.RCP.Metro.Games.Structure;
+﻿using RayCarrot.RCP.Metro.Games.Structure;
 
 namespace RayCarrot.RCP.Metro;
 
@@ -27,13 +24,6 @@ public sealed class GameDescriptor_Rayman3PrintStudio_Win32 : Win32GameDescripto
 
     #region Protected Methods
 
-    protected override void RegisterComponents(IGameComponentBuilder builder)
-    {
-        base.RegisterComponents(builder);
-
-        builder.Register(new GameOptionsComponent(x => new Rayman3PrintStudioGameOptionsViewModel(x)));
-    }
-
     protected override ProgramInstallationStructure CreateStructure() => new DirectoryProgramInstallationStructure(new ProgramFileSystem(new ProgramPath[]
     {
         // Files
@@ -44,19 +34,9 @@ public sealed class GameDescriptor_Rayman3PrintStudio_Win32 : Win32GameDescripto
 
     #region Public Methods
 
-    // Can only be downloaded
     public override IEnumerable<GameAddAction> GetAddActions() => new GameAddAction[]
     {
-        new DownloadGameAddAction(this, new Uri[]
-        {
-            new(AppURLs.Games_PrintStudio1_Url),
-            new(AppURLs.Games_PrintStudio2_Url),
-        })
-    };
-
-    public override FinderQuery[] GetFinderQueries() => new FinderQuery[]
-    {
-        new PreviouslyDownloadedGameFinderQuery(GameId, LegacyGameId),
+        new LocateDirectoryGameAddAction(this)
     };
 
     #endregion

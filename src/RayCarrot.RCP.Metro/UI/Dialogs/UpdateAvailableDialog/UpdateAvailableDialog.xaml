@@ -12,8 +12,6 @@
                           d:DesignWidth="800" d:DesignHeight="600" 
                           d:DataContext="{d:DesignInstance rcp:UpdateAvailableDialogViewModel}">
 
-    <!-- TODO-LOC -->
-
     <Grid Margin="8">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -21,34 +19,46 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Margin="{StaticResource RCP.Thicknesses.Card}">
+        <Grid Grid.Row="0" Margin="{StaticResource RCP.Thicknesses.Card}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
-            <Grid Margin="0 0 0 4">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
 
-                <iconPacks:PackIconMaterial Grid.Column="0"
-                                            Kind="DownloadCircleOutline" 
-                                            Width="24" 
-                                            Height="24" 
-                                            Foreground="{StaticResource RCP.Brushes.StatusComplete}" 
-                                            Margin="0 0 8 0"/>
+                <Grid Margin="0 0 0 4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Column="1" 
-                           Text="Update Available" 
-                           Style="{StaticResource RCP.Styles.TextBlock.Header}" 
-                           VerticalAlignment="Center"  />
+                    <iconPacks:PackIconMaterial Grid.Column="0"
+                                                Kind="DownloadCircleOutline" 
+                                                Width="24" 
+                                                Height="24" 
+                                                Foreground="{StaticResource RCP.Brushes.StatusComplete}" 
+                                                Margin="0 0 8 0"/>
 
-            </Grid>
+                    <TextBlock Grid.Column="1" 
+                               Text="{Resx UpdateAvailable_Header}" 
+                               Style="{StaticResource RCP.Styles.TextBlock.Header}" 
+                               VerticalAlignment="Center"  />
 
-            <rcp:DuoGrid ItemsSource="{Binding Path=InfoItems, Mode=OneTime}" />
+                </Grid>
 
-        </StackPanel>
+                <rcp:DuoGrid ItemsSource="{Binding Path=InfoItems, Mode=OneTime}" />
+
+            </StackPanel>
+
+            <Image Grid.Column="1"
+                   Source="{rcp:AssetImageSource Asset={x:Static rcp:MessageIconAsset.Question}}"
+                   Width="112" Height="112" />
+
+        </Grid>
 
         <GroupBox Grid.Row="1" 
-                  Header="Changelog" 
+                  Header="{Resx UpdateAvailable_ChangelogHeader}" 
                   Margin="{StaticResource RCP.Thicknesses.Card}" 
                   Background="{DynamicResource RCP.Brushes.Card.Background}"
                   rcp:Icon.Kind="CardTextOutline"
@@ -71,7 +81,7 @@
             <Button Grid.Column="1" 
                     Click="CancelButton_OnClick"
                     Style="{StaticResource RCP.Styles.Button.Flat}"
-                    Content="Remind me later"
+                    Content="{Resx UpdateAvailable_Cancel}"
                     VerticalAlignment="Center"
                     rcp:Icon.Kind="ClockOutline"
                     IsCancel="True"
@@ -80,7 +90,7 @@
             <Button Grid.Column="2" 
                     Click="ConfirmButton_OnClick"
                     Style="{StaticResource RCP.Styles.Button.Accent}"
-                    Content="Update"
+                    Content="{Resx UpdateAvailable_Confirm}"
                     VerticalAlignment="Center"
                     IsDefault="True"
                     rcp:Icon.Kind="DownloadOutline" />
